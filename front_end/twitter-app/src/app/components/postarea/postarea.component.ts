@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-postarea',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./postarea.component.css']
 })
 export class PostareaComponent implements OnInit {
-
-  constructor() { }
+  text: string = '';
+  constructor(@Inject('data') private data) { }
 
   ngOnInit() {
+  }
+
+  postTweet(): void {
+    if(this.text !== '') {
+      this.data.postTweet(this.text);
+      this.text = '';
+    }  
   }
 
 }

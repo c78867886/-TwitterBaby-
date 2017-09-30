@@ -8,9 +8,10 @@
     </md-panel-description>
   </md-expansion-panel-header>
   <md-form-field class="example-full-width">
-    <textarea mdInput placeholder="Create A Tweet"></textarea>
+    <textarea mdInput placeholder="Create A Tweet" [(ngModel)]='text'></textarea>
   </md-form-field>
-  <button md-raised-button color="primary" class="submitbtn">
+  <button md-raised-button color="primary" class="submitbtn" (click)='postTweet()'>
     Tweet!
   </button>
+  <p>{{ text }}</p>
 </md-expansion-panel>

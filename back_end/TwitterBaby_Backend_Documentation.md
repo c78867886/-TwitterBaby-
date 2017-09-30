@@ -117,7 +117,7 @@ func (h *Handler) NewTweet(c echo.Context) (err error)
 > Return 404 Not Found if the user is not in the database.  
 > Return 400 Bad Request if the content of the tweet is empty.  
 > Sample call:  
-> curl -X POST http://127.0.0.1:1323/api/v1/newTweet -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDY1OTA3MTUsImlkIjoiNTljYjY5Y2NhNTRkNzU3YThlMzljOTc0In0.8A8hQQtbZeYBT3LDmOu_-OnrmRsfSby-KZw0eAMJ06s' -d '{"message":"First tweet!"}'
+> curl -X POST http://127.0.0.1:1323/api/v1/newTweet -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDcwMTMxODYsImlkIjoiNTljYzhjOTVhNTRkNzVkNWM4YmUzYWE3In0.aiOsy8FbLcKV_EffHwOvfOZ-2rwg-kod5ov-v6xn98M' -d '{"message":"First tweet!"}'
 
 ```go
 func (h *Handler) ShowFollower(c echo.Context) (err error)

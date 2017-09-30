@@ -33,20 +33,26 @@ export class DataService {
   followUser(mongoid: string): Promise<Object> {
     let post = {};
     let options: RequestOptions = this.getHeader();
-    return this.http.post(`http://127.0.0.1:1323/api/v1/follow/${mongoid}`, post, options)
+    return this.http.post(this.localhost + `/api/v1/follow/${mongoid}`, post, options)
       .toPromise();
   }
 
-  unfollowUser(mongoid: string): void {
+  unfollowUser(mongoid: string) {
     
   }
 
+  postTweet(text: string): Promise<object> {
+    let post = {message: text};
+    let options: RequestOptions = this.getHeader();
+    return this.http.post(this.localhost + "/api/v1/newTweet", post, options)
+      .toPromise();
+  }
 
   mockLogin(): Promise<Object> {
     let loginfo: object = {email:"hojason117@gmail.com", password:"test1"};
     let headers: Headers = new Headers({ 'content-type': 'application/json'});
     let options: RequestOptions = new RequestOptions({ headers: headers });
-    return this.http.post('http://127.0.0.1:1323/api/v1/login', loginfo, options)
+    return this.http.post(this.localhost + '/api/v1/login', loginfo, options)
       .toPromise()
       .then((res: Response) => {
         console.log(res.json());
