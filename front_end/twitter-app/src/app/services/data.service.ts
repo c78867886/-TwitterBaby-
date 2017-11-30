@@ -35,7 +35,10 @@ export class DataService {
     this.timelineSource.next([]);
     this.http.get(this.localhost +`/api/v1/tweettimeline/${id}?perpage=15&page=${page}`, options)
                       .toPromise()
-                      .then((res: Response) => this.timelineSource.next(res.json()))
+                      .then((res: Response) => {
+                        console.log(res.json());
+                        this.timelineSource.next(res.json());
+                      })
                       .catch(this.handleError);
     return this.timelineSource.asObservable();
   }
@@ -96,21 +99,44 @@ export class DataService {
 
   }
 
-  //MockLogin only for development
-  mockLogin(): Promise<Object> {
-    let loginfo: object = {email:"hojason117@gmail.com", password:"test1"};
-    let headers: Headers = new Headers({ 'content-type': 'application/json'});
-    let options: RequestOptions = new RequestOptions({ headers: headers });
-    return this.http.post('http://127.0.0.1:1323/api/v1/login', loginfo, options)
-      .toPromise()
-      .then((res: Response) => {
-        console.log(res.json());
-        localStorage.setItem('access_token', res.json().token);
-        localStorage.setItem('id', res.json().id);
-        localStorage.setItem('user_info_object', JSON.stringify(res.json()));
-      })
-      .catch(this.handleError);
+  //Delete Tweet
+  deleteTweet(tweetId: string): Promise<Object> {
+    let options: RequestOptions = this.getHeader();
+    return this.http.delete(this.localhost + '/api/v1/deleteTweet/' + tweetId, options)
+            .toPromise()
+            .then((res: Response) => {
+              return res.json();
+            })
+            .catch(this.handleError);
   }
+
+  // ReTweet
+  retweet(id: string, data: object): Promise<Object> {
+    let options: RequestOptions = this.getHeader();
+    return this.http.post(this.localhost + '/api/v1/reTweet', data, options)
+            .toPromise()
+            .then((res) => {
+              this.getTweetListTimeLine(id, 1);
+              return res.json();
+            })
+            .catch(this.handleError);
+  }
+
+  //MockLogin only for development
+  // mockLogin(): Promise<Object> {
+  //   let loginfo: object = {email:"hojason117@gmail.com", password:"test1"};
+  //   let headers: Headers = new Headers({ 'content-type': 'application/json'});
+  //   let options: RequestOptions = new RequestOptions({ headers: headers });
+  //   return this.http.post('http://127.0.0.1:1323/api/v1/login', loginfo, options)
+  //     .toPromise()
+  //     .then((res: Response) => {
+  //       console.log(res.json());
+  //       localStorage.setItem('access_token', res.json().token);
+  //       localStorage.setItem('id', res.json().id);
+  //       localStorage.setItem('user_info_object', JSON.stringify(res.json()));
+  //     })
+  //     .catch(this.handleError);
+  // }
 
   // ERROR handler
   private handleError(error: any): Promise<any> {

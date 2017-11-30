@@ -2,7 +2,7 @@ import { browser, by, element, protractor } from 'protractor';
 
 export class NavBarPage {
   sleep() {
-    browser.sleep(1000);
+    browser.sleep(500);
   }
 
   navigateToHome() {

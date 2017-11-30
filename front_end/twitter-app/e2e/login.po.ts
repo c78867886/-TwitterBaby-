@@ -3,7 +3,7 @@ import { browser, by, element, protractor } from 'protractor';
 export class LoginPage {
   // Async
   sleep() {
-    browser.sleep(1000);
+    browser.sleep(500);
   }
   
   // Navigate

@@ -329,7 +329,7 @@ func (h *Handler) ShowFollowing(c echo.Context) (err error) {
 //					URL: "/api/v1/updateUserInfo"
 //					Method: POST
 //					Return 200 OK on success, along with the user data.
-//					Return 400 Bad Request if firstname is empty.
+//					Return 400 Bad Request if one or more fields are empty.
 //					Return 404 Not Found if the user is not in the database.
 func (h *Handler) UpdateUserInfo(c echo.Context) (err error) {
 	username := usernameFromToken(c)
@@ -350,7 +350,7 @@ func (h *Handler) UpdateUserInfo(c echo.Context) (err error) {
 	}
 
 	if update.FirstName == "" {
-		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "Firstname cannot be empty."}
+		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "Firstname must not be empty."}
 	}
 
 	err = db.DB(h.dbName).C(model.UserCollection).Update(bson.M{"username": username}, bson.M{"$set": bson.M{"firstname": update.FirstName, "lastname": update.LastName, "bio": update.Bio, "tag": update.Tag}})
@@ -408,6 +408,8 @@ func (h *Handler) UpdateProfilePicture(c echo.Context) (err error) {
 		}
 		return
 	}
+
+	db.DB(h.dbName).C(model.TweetCollection).UpdateAll(bson.M{"owner": username}, bson.M{"$set": bson.M{"picture": &image.Base64String}})
 
 	user := &model.User{}
 	err = db.DB(h.dbName).C(model.UserCollection).Find(bson.M{"username": username}).One(user)

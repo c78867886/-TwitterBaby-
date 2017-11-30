@@ -83,7 +83,8 @@ export class NavBarComponent implements OnInit {
   refresh(): void {
     this.rcvnewTweet = false;
     if (this.route.url !== '/home') {
-      this.route.navigateByUrl('/home');
+      this.route.navigateByUrl('/home')
+        .catch(err => console.log(err));
     } else {
       this.data.getTweetListTimeLine(this.hostName, 1);
     }

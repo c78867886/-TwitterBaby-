@@ -45,7 +45,8 @@ export class EditUserProfileDialogComponent implements OnInit {
   onCloseConfirm(){
       let userNewInfo: object = {"firstname": this.userFirstName,
                                 "lastname": this.userLastName,
-                                "bio":this.userBio};
+                                "bio":this.userBio,
+                              };
       this.data.updateUserInfo(userNewInfo)
         .then(userinfo =>{
           console.log("Update successfully!");

@@ -1,18 +1,14 @@
 
-<!-- <app-nav-bar></app-nav-bar> -->
 <div class="profileContainer">
   <!-- Banner -->
   <div class="banner">
       <div id="banner_img">
           <div class="image-upload">
               <label for="file-input">
-                  <img class='profileheadimg' src="assets/images/grumpycat.jpeg"/>
+                  <img class='profileheadimg' src="{{ avatar || 'assets/images/defaultAvator.jpeg' }}"/>
               </label>
-              <input id="file-input" type="file" #fileInput (change)='uploadImg($event)' accept="image/jpg, image/jpeg, image/png" style="display: none;"/>
+              <input id="file-input" type="file" name="inputimg" required (change)="fileChange($event)"  accept="image/jpeg" #input>
           </div>
-          <!-- <input class="profileheadimg" type="image" (click)='uploadImg()' src="assets/images/grumpycat.jpeg" alt=""/> -->
-          <!-- <image-upload url="https://httpbin.org/status/200"></image-upload>
-          <img class="profileheadimg" (click)='uploadImg()' src="assets/images/grumpycat.jpeg" value="Head Image"> -->
       </div>  
   </div>
   <div class="banner_menu">
@@ -20,9 +16,8 @@
           <nav class="nav">
             <ul>
                   <li><a img class="logo" src="assets/images/twitterLogo.png"></a></li> 
-                  <li><a href="javascript:myFunction('You clicked!')" (click)=onGetTweets()>Tweets</a></li>
-                  <li><a href="" click=getfollowing()>Following</a></li>
-                  <li><a href="">Moments</a></li>
+                  <li><a [routerLink]="['/user/', userName]">Tweets</a></li>
+                  <li><a [routerLink]="['/user/following/', userName]">Following</a></li>
             </ul>
           </nav>
       </div>
@@ -30,35 +25,6 @@
           <button id="profileButton" (click)="openEditUserProfileDiag()">Edit Profile</button>
       </div>   
   </div>
-
-  <!-- Left Box -->
-  <div class="leftBox">
-    <div class="userInfo">
-        <div><label>{{userFirstName}} {{userLastName}}</label></div>
-        <div><label>Joined Date</label></div>
-    </div>
-    <div>
-        <h3 id=head3>Who to follow</h3>
-    </div>
-    <div class="cardBox">
-        <mat-card  class="tofollow-card">
-            <mat-card-header>
-              <img class="headpotrait" mat-card-avatar src="assets/images/head1.jpg" >
-              <mat-card-title>Peter Goodman</mat-card-title>
-              <button class="card_button" mat-raised-button>Follow</button>
-            </mat-card-header>
-          </mat-card>
-          <mat-card  class="tofollow-card">
-              <mat-card-header>
-                <img class="headpotrait" mat-card-avatar src="assets/images/head2.jpg" >
-                <mat-card-title>Diane Xie</mat-card-title>
-                <button class="card_button" mat-raised-button>Follow</button>
-              </mat-card-header>
-            </mat-card>
-      </div>
-
-  </div>
-
   <div class="displayBody">
     <h3>My Info</h3>
     <form>

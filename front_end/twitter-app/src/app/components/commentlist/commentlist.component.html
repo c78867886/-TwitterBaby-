@@ -2,7 +2,7 @@
 <div *ngFor="let comment of commentlist; let i=index">
   <mat-card  class="comments" *ngIf="i<3" >
       <mat-card-header >
-          <div mat-card-avatar class="header-image"></div>
+          <!-- <div mat-card-avatar class="header-image"></div> -->
           <mat-card-title>{{ comment.fromusername }}   {{ comment.timestamp | date: 'short'}}</mat-card-title>
           <mat-card-subtitle class="commentContent">{{ comment.message }}</mat-card-subtitle>
       </mat-card-header> 
@@ -14,7 +14,7 @@
   </mat-card>
   <mat-card  class="comments" *ngIf="i>3 && toggle" >
         <mat-card-header >
-            <div mat-card-avatar class="header-image"></div>
+            <!-- <div mat-card-avatar class="header-image"></div> -->
             <mat-card-title>{{ comment.fromusername }}   {{ comment.timestamp | date: 'short'}}</mat-card-title>
             <mat-card-subtitle>{{ comment.message }}</mat-card-subtitle>
          </mat-card-header> 

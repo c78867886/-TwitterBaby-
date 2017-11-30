@@ -28,6 +28,7 @@ export class UserPageComponent implements OnInit {
           this.username = userinfo.userinfo.username;
           let userInfo = JSON.parse(localStorage.getItem("user_info_object"));
           this.isHost = this.username === userInfo.username ? true : false;
+          this.username = userInfo.username;
         }     
       )
       .catch(err => {

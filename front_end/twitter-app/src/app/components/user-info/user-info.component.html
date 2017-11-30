@@ -1,9 +1,9 @@
 <mat-card class="userInfo" *ngIf="userInfo !== null">
   <mat-card-header class="header">
-    <img class="image" mat-card-sm-image [src] = "url">
+    <img class="image" mat-card-sm-image [src] = "userInfo.userinfo.picture || url">
     <div>
         <mat-card-title>{{userInfo.userinfo.username}}</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        <mat-card-subtitle>Animal Breed</mat-card-subtitle>
     </div>
   </mat-card-header>
   <mat-card-content>

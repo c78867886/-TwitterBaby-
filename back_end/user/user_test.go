@@ -456,7 +456,7 @@ func TestUpdateUserInfo(t *testing.T) {
 		restHTTPTestCase{
 			false,
 			restHTTPInput{"testUpdateUserInfo_empty_firstname", `{"firstname":"","lastname":"","bio":"","tag":"testUpdate"}`},
-			restHTTPExpected{http.StatusBadRequest, "Firstname cannot be empty."},
+			restHTTPExpected{http.StatusBadRequest, "Firstname must not be empty."},
 		},
 		restHTTPTestCase{
 			false,

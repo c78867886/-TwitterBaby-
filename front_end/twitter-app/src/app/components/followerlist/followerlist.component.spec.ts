@@ -24,6 +24,7 @@ describe('FollowerlistComponent', () => {
   let spy: jasmine.Spy;
   let dataService: DataService;
   let de: DebugElement;
+  let deArray: DebugElement[];
   let el: HTMLElement;
   
   beforeEach(async(() => {
@@ -68,5 +69,14 @@ describe('FollowerlistComponent', () => {
     de = fixture.debugElement.query(By.css('.flBio'));
     el = de.nativeElement;
     expect(el.textContent).toContain('test');
+  });
+
+  it('should have two follower in the list', () => {
+    component.followerList = [{bio: 'test', username: 'test', id: 'test'},
+                              {bio: 'test2', username: 'test2', id: 'test2'}];
+    fixture.detectChanges();
+    deArray = fixture.debugElement.queryAll(By.css('.flBio'));
+    el = deArray[1].nativeElement;
+    expect(el.textContent).toContain('test2');
   });
 });

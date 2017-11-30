@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
+import { User } from '../components/userprofile/user';
 
 @Injectable()
 export class MediaService {
@@ -22,21 +23,24 @@ export class MediaService {
    */
   getHeader(): RequestOptions {
     let access_token: string = localStorage.getItem("access_token");
-    let headers: Headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+    let headers: Headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', 'Bearer ' + access_token);
     return new RequestOptions({ headers: headers });
   }
 
 
-  uploadImg(formdata: any) {
+  uploadAvator(user: User) : Observable<object> {
     let options: RequestOptions = this.getHeader();
-    // let _url: string = "https://httpbin.org/status/200";
-    return this._http.post(`${this.backEndHostUrl}/updateProfilePic`,formdata ,options)
-      .toPromise()
-      .then((res:Response)=> {
-        console.log("Backend Upload image to backend successfully");
-      })
-      .catch(this.handleError);
+    let message: object = { picture: user.picture };
+    console.log("picture data: " + user.picture);
+    return this._http.post(`${this.backEndHostUrl}/updateProfilePic`, message ,options)
+    .map(res => res.json())
+    .do(res => {
+       console.log("---------");
+       console.log(res);
+       console.log("Get result successfully!");
+    })
+    .catch(this.handleError);
   }
 
     // ERROR handler

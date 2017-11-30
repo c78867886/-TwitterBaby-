@@ -14,6 +14,7 @@ export interface userinfo {
     id: string;
     lastname: string;
     username: string;
+    picture ?: string;
 }
 
 export interface signUpUserInfo{

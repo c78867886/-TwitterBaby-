@@ -50,15 +50,15 @@ describe('PostareaComponent', () => {
     fixture = TestBed.createComponent(PostareaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    // de = fixture.debugElement.query(By.css('.disBtn'));
-    // el = de.nativeElement;
   });
 
   it('should be created', () => {
     expect(component).toBeTruthy();
-    // expect(el).toBeTruthy();
-    // component.content = 'test';
-    // fixture.detectChanges();
-    // expect(el).toBeNull();
   });
+
+  it('should have disabled button', () => {
+    de = fixture.debugElement.query(By.css('.expansionpanel'));
+    expect(de).toBeTruthy();
+  });
+
 });

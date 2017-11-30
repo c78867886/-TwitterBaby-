@@ -50,8 +50,7 @@
 }
 
 .notification {
-    background: red;
-    color: white;
+    color: red;
     line-height: 110%;
     position: relative;
     right: -22px;

@@ -18,7 +18,8 @@ export class PostareaComponent implements OnInit {
       .then(tweet => {
         this.content = "";
         console.log(tweet);
-      });
+      })
+      .catch(err => console.log(err));
   }
 
 }

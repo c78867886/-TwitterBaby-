@@ -3,7 +3,7 @@ import { browser, by, element, protractor } from 'protractor';
 export class HomePage {
   // Async
   sleep() {
-    browser.sleep(1000);
+    browser.sleep(500);
   }
 
   // Navigate
@@ -31,7 +31,8 @@ export class HomePage {
   getNewTweet() {
     return element.all(by.css('.tweetMessage')).first();
   }
-
+  
+  // Comment part
   getCommentBtn() {
     return element.all(by.css('#comment')).first();
   }
@@ -54,5 +55,18 @@ export class HomePage {
 
   getCancelBtn() {
     return element(by.css("#closeBtn"));
+  }
+
+  // Share part
+  getShareBtn() {
+    return element.all(by.css("#share")).first();
+  }
+
+  getShareInput() {
+    return element(by.css(".shareInput"));
+  }
+
+  getShareSubmitbtn() {
+    return element(by.css(".submitBtn"));
   }
 }

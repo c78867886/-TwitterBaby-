@@ -1,7 +1,7 @@
 .profileContainer{
     width:70%;
     height: 100%;
-    margin: auto;
+    margin: 0 auto;
     font: 15px/1.5 Arial, Helvetica, sans-serif;
     background-color: rgb(235, 231, 231);
 }
@@ -81,57 +81,10 @@
         background-color: rgba(247, 247, 169, 0.856);   
     }
 
-
-/* Left box--------------- */
-.leftBox{
-    height: 500px;
-    width: 38%;
-    border-width:thin;
-    /* border-color: rgba(0,173,167,0.6); */
-    float: left;
-}
-    .userInfo{
-        width: 92%;
-        height: 50px;
-        border-width:1px;
-        /* border: solid;
-        border-color: rgba(0,173,167,0.6); */
-        padding: 5px;
-        border-bottom: groove;
-        border-bottom-color: rgba(228, 225, 225, 0.4);
-    }
-    #head3{
-        padding: 10px;
-    }
-    .cardBox{
-        width: 100%;
-    }
-    .tofollow-card{
-        width: 83%;
-        height: 50px;
-        border-bottom: groove;
-        border-bottom-color: rgba(224, 219, 219, 0.4);
-        float: left;
-    }
-    .headpotrait{
-        width: 60px;
-        height: 60px;
-        border-radius: 50%; 
-    }
-    .card_button{
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        float: right;
-    }
-
-
-
 /* Display Body--------------- */
 .displayBody{
-   width: 60%;
+   width: 100%;
    height: 500px;
-   float: right;
    /* float: right; */
    border: solid;
    border-color: rgba(0,173,167,0.6);
@@ -149,6 +102,9 @@
         height: 100px;
     }
 
+.profileLabel {
+    padding-left: 15px; 
+}
 
 
 

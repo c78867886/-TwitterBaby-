@@ -43,6 +43,8 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
 import { EditUserProfileDialogComponent } from './components/edit-user-profile-dialog/edit-user-profile-dialog.component';
 import { EditCommentsDialogComponent } from './components/edit-comments-dialog/edit-comments-dialog.component';
 import { CommentlistComponent } from './components/commentlist/commentlist.component';
+import { RetweetDialogComponent } from './components/retweet-dialog/retweet-dialog.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -64,6 +66,8 @@ import { CommentlistComponent } from './components/commentlist/commentlist.compo
     EditUserProfileDialogComponent,
     EditCommentsDialogComponent,
     CommentlistComponent,
+    RetweetDialogComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,7 @@ import { CommentlistComponent } from './components/commentlist/commentlist.compo
   entryComponents:[
     EditUserProfileDialogComponent,
     EditCommentsDialogComponent,
+    RetweetDialogComponent,
   ],
   providers: [
     { provide: 'data', useClass: DataService },

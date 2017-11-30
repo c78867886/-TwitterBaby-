@@ -52,6 +52,7 @@ func NewServer(h *handler.Handler) (e *echo.Echo) {
 	e.GET("/api/v1/tweettimeline/:username", h.TweetHandler.FetchTweetTimeLine)
 	e.POST("/api/v1/newcomment/:tweet", h.CommentHandler.NewComment)
 	e.GET("/api/v1/fetchcomment/:tweet", h.CommentHandler.FetchComment)
+	e.POST("/api/v1/reTweet", h.TweetHandler.ReTweet)
 
 	return e;
 }

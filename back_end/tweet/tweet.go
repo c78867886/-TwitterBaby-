@@ -130,11 +130,20 @@ func (h *Handler) NewTweet(c echo.Context) (err error) {
 	db := h.db.Clone()
 	defer db.Close()
 
-	tweet := &model.Tweet{ID: bson.NewObjectId(), Owner: string(userName), Numcomment: 0, Timestamp: time.Now()}
+	tweet := &model.Tweet{ID: bson.NewObjectId(), Owner: string(userName), Numcomment: 0, Timestamp: time.Now(), Isretweet: false}
 	if err = c.Bind(tweet); err != nil {
 		return
 	}
-	
+
+	// Retrieve user info from database
+	user := model.User{}
+	err = db.DB(h.dbName).C(model.UserCollection).Find(bson.M{"username": userName}).One(&user)
+	if err != nil {
+		if err == mgo.ErrNotFound {
+			return &echo.HTTPError{Code: http.StatusNotFound, Message: "User does not exist."}
+		}
+		return
+	}
 	
 	// Validation
 	if tweet.Message == "" {
@@ -142,6 +151,12 @@ func (h *Handler) NewTweet(c echo.Context) (err error) {
 	}
 	if len(tweet.Picture) > 10485760 {
 		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "Image must be smaller than 10 MB."}
+	}
+
+	if user.Picture != ""{
+		tweet.Picture = user.Picture
+	}else{
+		tweet.Picture = ""
 	}
 	
 	// Save tweet in database
@@ -278,6 +293,74 @@ func (h *Handler) FetchTweetTimeLine (c echo.Context) (err error) {
 
 	return c.JSON(http.StatusOK, container)
 	//return c.JSON(http.StatusOK, &tweets)
+}
+
+// ReTweet : Retweet a tweet.
+//			  URL: "/api/v1/reTweet"
+//			  Method: POST
+//			  Return 200 Created on success, along with the tweet data.
+//			  Return 400 Bad Request if the content of the tweet is empty.
+//			  Return 400 Bad Request if the image is larger than 10 MB.
+func (h *Handler) ReTweet(c echo.Context) (err error) {
+	userName := userNameFromToken(c)
+
+	db := h.db.Clone()
+	defer db.Close()
+
+	tweet := &model.Tweet{ID: bson.NewObjectId(), Owner: string(userName), Numcomment: 0, Timestamp: time.Now(), Isretweet: true}
+	if err = c.Bind(tweet); err != nil {
+		return
+	}
+	
+
+	// Fetch the info of the tweet retweeted and check tweetID is valid
+	retweet := new(model.Tweet)
+	if bson.IsObjectIdHex(tweet.Idretweet){
+		err = db.DB(h.dbName).C("tweets").FindId(bson.ObjectIdHex(tweet.Idretweet)).One(&retweet)
+		if err != nil {
+			if err == mgo.ErrNotFound {
+				return &echo.HTTPError{Code: http.StatusNotFound, Message: "Invalid tweet ID"}
+			}
+			return &echo.HTTPError{Code: http.StatusNotFound, Message: "Invalid tweet ID"}
+		}
+	}else{
+		return &echo.HTTPError{Code: http.StatusNotFound, Message: "Invalid tweet ID"}
+	}
+
+	// Validation
+	if tweet.Message == "" {
+		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "Message cannot be empty."}
+	}
+	if len(tweet.Picture) > 10485760 {
+		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "Image must be smaller than 10 MB."}
+	}
+	
+	tweet.Messageretweet = retweet.Message
+	tweet.Ownerretweet = retweet.Owner
+
+	// Save retweet in database
+	err = db.DB(h.dbName).C("tweets").Insert(tweet)
+	if err != nil {
+		return
+	}
+
+	tweet.ID = ""
+	var container struct {
+		Owner	string	`json:"owner"`
+		Message	string	`json:"message"`
+		Ownerretweet	string	`json:"ownerretweet"`
+		Messageretweet	string	`json:"messageretweet"`
+		Picture string	`json:"picture"`
+	}
+	container.Owner = tweet.Owner
+	container.Message = tweet.Message
+	container.Ownerretweet = tweet.Ownerretweet
+	container.Messageretweet = tweet.Messageretweet
+	container.Picture = tweet.Picture
+
+	//h.notifOperator <- model.Notification{Timestamp: time.Now(), Type: model.NewTweetType, Detail: model.NewTweetNotif{Publisher: userName}}
+
+	return c.JSON(http.StatusOK, container)
 }
 
 func userNameFromToken(c echo.Context) string {

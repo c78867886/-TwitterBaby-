@@ -15,7 +15,7 @@ export class EditCommentsDialogComponent implements OnInit {
   public commentContent: string = '';
   commentsSubscription: Subscription;
   list:Comment[];
-  
+  url: string = 'http://s7d2.scene7.com/is/image/PetSmart/PB1201_STORY_CARO-Authority-HealthyOutside-DOG-20160818?$PB1201$';
   constructor(public thisDialogRef:MatDialogRef<EditCommentsDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public tweet,
               @Inject('data') private data,

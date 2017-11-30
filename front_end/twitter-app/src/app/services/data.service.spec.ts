@@ -1,6 +1,6 @@
 import { TestBed, inject, getTestBed, fakeAsync, tick } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Http, BaseRequestOptions, ResponseOptions } from '@angular/http';
+import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
 import { DataService } from './data.service';
 import { HttpModule } from '@angular/http';
 describe('DataService', () => {
@@ -119,6 +119,61 @@ describe('DataService', () => {
     });
     tick();
     expect(service.postTweet("id", "content")).toBeDefined();
+  }));
+
+  it('deleteTweet() should send request to server', fakeAsync(() => {
+    backend.connections.subscribe(connection => { 
+      let options = new ResponseOptions({
+        body: JSON.stringify({success: true})
+      });
+      connection.mockRespond(new Response(options));
+    });
+    tick();
+    expect(service.deleteTweet("id")).toBeDefined();
+  }));
+
+  it('retweet() should send request to server', fakeAsync(() => {
+    backend.connections.subscribe(connection => { 
+      let options = new ResponseOptions({
+        body: JSON.stringify({success: true})
+      });
+      connection.mockRespond(new Response(options));
+    });
+    tick();
+    expect(service.retweet("id", {})).toBeDefined();
+  }));
+
+  it('updateuserinfo() should send request to server', fakeAsync(() => {
+    backend.connections.subscribe(connection => { 
+      let options = new ResponseOptions({
+        body: JSON.stringify({success: true})
+      });
+      connection.mockRespond(new Response(options));
+    });
+    tick();
+    expect(service.updateUserInfo({})).toBeDefined();
+  }));
+
+  it('addnewcomment() should send request to server', fakeAsync(() => {
+    backend.connections.subscribe(connection => { 
+      let options = new ResponseOptions({
+        body: JSON.stringify({success: true})
+      });
+      connection.mockRespond(new Response(options));
+    });
+    tick();
+    expect(service.addNewComment({}, "222")).toBeDefined();
+  }));
+
+  it('fetchComment() should send request to server', fakeAsync(() => {
+    backend.connections.subscribe(connection => { 
+      let options = new ResponseOptions({
+        body: JSON.stringify({success: true})
+      });
+      connection.mockRespond(new Response(options));
+    });
+    tick();
+    expect(service.fetchComment("222")).toBeDefined();
   }));
 
 });

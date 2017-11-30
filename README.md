@@ -1,6 +1,7 @@
 # TwitterBaby
-> This is the course project for CEN5035 aim to create a naive version of twitter. 
-> This project will create a web application with basic twitter function including: (filled here)
+> This is the course project for CEN5035 aim to create a simple version of twitter. 
+> This project will create a web application with basic twitter function including: 
+  Login, Signup, Show tweets in the home wepage, Follow, Unfollow, Post Tweet, Delete Tweet, Edit User Profile, Notification, Comments....
 
 ## Getting Started
 
@@ -14,40 +15,22 @@ Give examples
 Installing
 
 ## How to use
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-Give the example
-And repeat
-
-until finished
-End with an example of getting some data out of the system or using it for a little demo
-
-Running the tests
-
-Explain how to run the automated tests for this system
-
-Break down into end to end tests
-
-Explain what these tests test and why
-
-Give an example
-And coding style tests
-
-Explain what these tests test and why
-
-Give an example
-Deployment
-
-Add additional notes about how to deploy this on a live system
+### Serve website
+Run ```ng serve``` under frontend folder. Open http://localhost:4200/ in browser.
+### Build
+Run ```ng build``` under frontend folder.
+### Unit Test for Front-End
+Run ```ng test``` under frontend folder.
+### E2E Test for Front-End
+Run ```ng e2e``` under frontend folder.
+### Generate Compodoc Documentation
+Run ```npm run compodoc``` under frontend folder. Documentation served at 8080 port.
 
 ## Built With
 
-Dropwizard - The web framework used
-Maven - Dependency Management
-ROME - Used to generate RSS Feeds
-Contributing
+* Angular 2 - The web framework used
+* Echo - Go web framework
+* MongoDB - Database used
 
 ## Version
 
@@ -55,10 +38,7 @@ Contributing
 
 ## Authors
 
-- Jason Ho
+- Jason Chia-Hsien Ho
 - Chih-Yin Lee
-- Jason He
+- Jason He (Xing He)
 - Diane Lin(Xiemenger)
-
-
-

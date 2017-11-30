@@ -7,7 +7,6 @@
       </mat-dialog-actions>
      <mat-card class="card">
       <mat-card-header>
-        <div mat-card-avatar class="header-image"></div>
         <mat-card-title>{{tweet.owner}}</mat-card-title>
         <mat-card-subtitle>{{ tweet.timestamp | date: 'short'}}</mat-card-subtitle>
       </mat-card-header>
@@ -16,11 +15,6 @@
             {{ tweet.message }}
           </p>
         </mat-card-content>
-        <mat-dialog-actions>
-            <button matTooltip="Like" class="comments" mat-icon-button >
-                <mat-icon>thumb_up</mat-icon>
-            </button>
-        </mat-dialog-actions>
       </mat-card>
     </div>
     <mat-expansion-panel class="expansionpanel2">

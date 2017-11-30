@@ -24,8 +24,10 @@ describe('twitter-app Home', () => {
   });
 
   it('should write a comment', () => {
+    expect(page.getCommentBtn()).toBeTruthy();
     page.getCommentBtn().click();
     page.sleep();
+    
     page.getCommentText().click();
     page.getCommentTextArea().sendKeys('Test Comment for E2E test!');
     expect(page.getCommentTextArea().getAttribute('value')).toEqual('Test Comment for E2E test!');
@@ -34,6 +36,18 @@ describe('twitter-app Home', () => {
     expect(page.getCommentList().getText()).toEqual('Test Comment for E2E test!');
     
     page.getCancelBtn().click();
-  })
+    page.sleep();
+  });
+
+  it('should create a retweet', () => {
+    expect(page.getShareBtn()).toBeTruthy();
+    page.getShareBtn().click();
+    page.sleep();
+    page.getShareInput().sendKeys('This is a retweet message!');
+    page.sleep();
+    expect(page.getShareSubmitbtn()).toBeTruthy();
+    page.getShareSubmitbtn().click();
+    page.sleep();
+  });
 
 });

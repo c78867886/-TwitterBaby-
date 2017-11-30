@@ -29,19 +29,23 @@ describe('twitter-app Friendship', () => {
 
   it('should show profile page', () => {
     let rightBtn = page.getNavRightButton();
+    expect(rightBtn).toBeTruthy();
     rightBtn.click();
     page.sleep();
     let profileBtn = page.getProfileBtn();
+    expect(profileBtn).toBeTruthy();
     profileBtn.click();
     page.sleep();
-    expect(page.getProfileCpnt()).toBeDefined();
+    expect(page.getProfileCpnt().isPresent()).toBe(true);
   })
 
   it('should log out', () => {
     let rightBtn = page.getNavRightButton();
+    expect(rightBtn).toBeTruthy();
     rightBtn.click();
     page.sleep();
     let logoutBtn = page.getLogoutButton();
+    expect(logoutBtn).toBeTruthy();
     logoutBtn.click();
     page.sleep();
   });

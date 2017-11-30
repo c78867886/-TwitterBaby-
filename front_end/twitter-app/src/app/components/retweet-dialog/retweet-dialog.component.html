@@ -1,0 +1,7 @@
+<form class="form" autocomplete="off">
+  <mat-form-field class="example-full-width">
+    <input name="share" class="shareInput" [(ngModel)]="message" matInput placeholder="Share your feels...">
+  </mat-form-field>
+  <button class="submitBtn" mat-raised-button (click)="onSubmit(tweet.id)">SHARE</button>
+  <p><span class="ownerName">@{{ tweet.owner }}: </span>{{tweet.message}} </p>
+</form>

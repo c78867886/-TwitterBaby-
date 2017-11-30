@@ -8,7 +8,9 @@
     "build": "ng build",
     "test": "ng test --sourcemaps=false",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json --theme 'vagrant' -s" 
+  
   },
   "private": true,
   "dependencies": {
